@@ -8,53 +8,46 @@ namespace dzkurs
         static void Main(string[] args)
         {
             Random random = new Random();
-            List<string> array1 = new List<string>();
+            List<int> array1 = new List<int>();
             int array1Lenght = 5;
             int array2Lenght = 4;
-            List<string> array2 = new List<string>();
+            List<int> array2 = new List<int>();
+            List<int> tempArray1 = new List<int>();
 
-            for (int i = 0; i < array1Lenght; i++)
-            {
-                array1.Add(Convert.ToString(random.Next(1, 9)));
-                Console.Write(array1[i]);
-            }
+            WriteList(array1, array1Lenght, random);
 
-            for (int i = 0; i < array2Lenght; i++)
-            {
-                array2.Add(Convert.ToString(random.Next(1, 9)));
-                Console.Write(array2[i]);
-            }
+            WriteList(array2, array2Lenght, random);
 
             if (array1Lenght >= array2Lenght)
             {
                 for (int i = 0; i < array2Lenght; i++)
                 {
-                    array1.Add(array2[i]);
-                }
-
-                for (int i = 0; i < array1.Count; i++)
-                {
-                    Console.WriteLine(array1[i]);
-                }
-
-                for (int i = 0; i < array1.Count; i++)
-                {
-                    for (int j = 0; j < array1.Count; j++)
+                    if (array1.Contains(array2[i]))
                     {
-                        if (array1[i] == array1[j] && i != j)
-                        {
-                            array1.RemoveAt(j);
-                        }
+                        continue;
+                    }
+                    else
+                    {
+                        array1.Add(array2[i]);
                     }
                 }
 
+                
+
+                Console.WriteLine();
+
+                for (int i = 0; i < array1.Count; i++)
+                {
+                    Console.Write(array1[i]);
+                }
+
                 for (int i = 0; i < array1.Count; i++)
                 {
                     for (int j = 0; j < array1.Count; j++)
                     {
-                        string tempNumber;
+                        int tempNumber;
 
-                        if (Convert.ToInt32(array1[i]) < Convert.ToInt32(array1[j]))
+                        if (array1[i] < array1[j])
                         {
                             tempNumber = array1[j];
 
@@ -63,6 +56,8 @@ namespace dzkurs
                         }
                     }
                 }
+
+                Console.WriteLine();
 
                 for (int i = 0; i < array1.Count; i++)
                 {
@@ -75,6 +70,15 @@ namespace dzkurs
                 {
                     array2.Add(array1[i]);
                 }
+            }
+        }
+
+        static void WriteList(List<int> array, int arrayLenght, Random random)
+        {
+            for (int i = 0; i < arrayLenght; i++)
+            {
+                array.Add(random.Next(1, 9));
+                Console.Write(array[i]);
             }
         }
     }
