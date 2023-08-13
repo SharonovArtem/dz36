@@ -24,8 +24,6 @@ namespace dzkurs
             {
                 CombineArrays(array2Lenght, array1, array2);
 
-                RemoveSameNumbers(array1);
-
                 Console.WriteLine();
 
                 ArrangeNumbers(array1);
@@ -40,8 +38,6 @@ namespace dzkurs
             else if (array2.Count > array1.Count)
             {
                 CombineArrays(array1Lenght, array2, array1);
-
-                RemoveSameNumbers(array2);
 
                 Console.WriteLine();
 
@@ -58,7 +54,17 @@ namespace dzkurs
 
         static void CombineArrays(int arrayLenght, List<int> array1, List<int> array2)
         {
-            for (int i = 0; i < arrayLenght; i++)
+            for (int i = 0; i < arrayLenght - 1; i++)
+            {
+                array2.Add(array1[i]);
+            }
+
+            for (int i = 0; i < array1.Count; i++)
+            {
+                array1.Remove(array1[i]);
+            }
+
+            for (int i = 0; i < array2.Count; i++)
             {
                 if (array1.Contains(array2[i]))
                 {
@@ -80,22 +86,6 @@ namespace dzkurs
             }
         }
 
-        static List<int> RemoveSameNumbers(List<int> array)
-        {
-            for (int i = 0; i < array.Count; i++)
-            {
-                for (int j = 0; j < array.Count; j++)
-                {
-                    if (array[i] == array[j] && i != j)
-                    {
-                        array.RemoveAt(i);
-                    }
-                }
-            }
-
-            return array;
-        }
-
         static List<int> ArrangeNumbers(List<int> array)
         {
             for (int i = 0; i < array.Count; i++)
@@ -114,6 +104,10 @@ namespace dzkurs
                 }
             }
 
+            return array;
+        }
+    }
+}
             return array;
         }
     }
