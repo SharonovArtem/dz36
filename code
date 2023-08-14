@@ -8,11 +8,11 @@ namespace dzkurs
         static void Main(string[] args)
         {
             Random random = new Random();
+            List<int> mainArray = new List<int>(); ;
             List<int> array1 = new List<int>();
+            List<int> array2 = new List<int>();
             int array1Lenght = 5;
             int array2Lenght = 6;
-            List<int> array2 = new List<int>();
-            List<int> tempArray1 = new List<int>();
 
             WriteList(array1, array1Lenght, random);
 
@@ -22,59 +22,54 @@ namespace dzkurs
 
             if (array1Lenght >= array2Lenght)
             {
-                CombineArrays(array2Lenght, array1, array2);
+                CombineArrays(mainArray,array1);
+                CombineArrays(mainArray, array2);
 
                 Console.WriteLine();
 
-                ArrangeNumbers(array1);
+                ArrangeNumbers(mainArray);
 
                 Console.WriteLine();
 
-                for (int i = 0; i < array1.Count; i++)
+                for (int i = 0; i < mainArray.Count; i++)
                 {
-                    Console.Write(array1[i] + ", ");
+                    Console.Write(mainArray[i] + ", ");
                 }
             }
             else if (array2.Count > array1.Count)
             {
-                CombineArrays(array1Lenght, array2, array1);
+                CombineArrays(mainArray, array1);
+                CombineArrays(mainArray, array2);
 
                 Console.WriteLine();
 
-                ArrangeNumbers(array2);
+                ArrangeNumbers(mainArray);
 
                 Console.WriteLine();
 
-                for (int i = 0; i < array2.Count; i++)
+                for (int i = 0; i < mainArray.Count; i++)
                 {
-                    Console.Write(array2[i] + ", ");
+                    Console.Write(mainArray[i] + ", ");
                 }
             }
         }
 
-        static void CombineArrays(int arrayLenght, List<int> array1, List<int> array2)
+        static List<int> CombineArrays(List<int> mainArray,List<int> array)
         {
-            for (int i = 0; i < arrayLenght - 1; i++)
-            {
-                array2.Add(array1[i]);
-            }
 
-            for (int i = 0; i < array1.Count; i++)
+            for (int i = 0; i < array.Count; i++)
             {
-                array1.Remove(array1[i]);
-            }
-
-            for (int i = 0; i < array2.Count; i++)
-            {
-                if (array1.Contains(array2[i]))
+                if (mainArray.Contains(array[i]))
                 {
                     continue;
                 }
                 else
                 {
-                    array1.Add(array2[i]);
+                    mainArray.Add(array[i]);
                 }
             }
+
+            return mainArray;
         }
 
         static void WriteList(List<int> array, int arrayLenght, Random random)
@@ -104,10 +99,6 @@ namespace dzkurs
                 }
             }
 
-            return array;
-        }
-    }
-}
             return array;
         }
     }
