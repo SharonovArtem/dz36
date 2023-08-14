@@ -9,16 +9,14 @@ namespace dzkurs
         {
             Random random = new Random();
             List<int> mainArray = new List<int>(); ;
-            List<int> array1 = new List<int>();
-            List<int> array2 = new List<int>();
-            int array1Lenght = 5;
-            int array2Lenght = 6;
+            int[] array1 = new int[5];
+            int[] array2 = new int[6];
 
-            WriteList(array1, array1Lenght, random);
+            WriteList(array1, random);
 
             Console.Write("; ");
 
-            WriteList(array2, array2Lenght, random);
+            WriteList(array2, random);
             
             CombineArrays(mainArray,array1);
             CombineArrays(mainArray, array2);
@@ -35,10 +33,10 @@ namespace dzkurs
             }
         }
 
-        static List<int> CombineArrays(List<int> mainArray,List<int> array)
+        static List<int> CombineArrays(List<int> mainArray,int[] array)
         {
 
-            for (int i = 0; i < array.Count; i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 if (!mainArray.Contains(array[i]))
                 {
@@ -49,34 +47,34 @@ namespace dzkurs
             return mainArray;
         }
 
-        static void WriteList(List<int> array, int arrayLenght, Random random)
+        static void WriteList(int[] array, Random random)
         {
-            for (int i = 0; i < arrayLenght; i++)
+            for (int i = 0; i < array.Length; i++)
             {
-                array.Add(random.Next(1, 9));
+                array[i] = (random.Next(1, 9));
                 Console.Write(array[i]);
             }
         }
 
-        static List<int> ArrangeNumbers(List<int> array)
+        static List<int> ArrangeNumbers(List<int> mainArray)
         {
-            for (int i = 0; i < array.Count; i++)
+            for (int i = 0; i < mainArray.Count; i++)
             {
-                for (int j = 0; j < array.Count; j++)
+                for (int j = 0; j < mainArray.Count; j++)
                 {
                     int tempNumber;
 
-                    if (array[i] < array[j])
+                    if (mainArray[i] < mainArray[j])
                     {
-                        tempNumber = array[j];
+                        tempNumber = mainArray[j];
 
-                        array[j] = array[i];
-                        array[i] = tempNumber;
+                        mainArray[j] = mainArray[i];
+                        mainArray[i] = tempNumber;
                     }
                 }
             }
 
-            return array;
+            return mainArray;
         }
     }
 }
